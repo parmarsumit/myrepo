@@ -3,7 +3,8 @@ var AWS = require('aws-sdk');
 
 // Create an S3 client
 var s3 = new AWS.S3();
-
+var bucketname = "taggingtest"
+var filedir = "/Users/sumip/git-repo/aws-nodejs-sample/myrepo/"
 var date = new Date();
 var files = new Array();
 for(var i = 1; i < 3 ; i++) {
@@ -14,7 +15,7 @@ console.log(files);
 
 fLen = files.length;
 for (i = 0; i < fLen; i++) {
-var params = {Bucket:"taggingtest", Key:files[i] }
-var file = require('fs').createWriteStream("/Users/sumip/git-repo/aws-nodejs-sample/"+files[i]);
+var params = {Bucket:bucketname, Key:files[i] }
+var file = require('fs').createWriteStream(files[i]);
 s3.getObject(params).createReadStream().pipe(file);
 }
